@@ -33,7 +33,7 @@ PKG_BUILD_PARALLEL:=1
 
 include $(INCLUDE_DIR)/package.mk
 
-# CONFIGURE_ARGS+= -std=c99
+CONFIGURE_ARGS+= --enable-shared=yes --enable-static=no
 
 define Package/libtar
 	SECTION:=lib
