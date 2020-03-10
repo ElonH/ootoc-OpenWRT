@@ -61,9 +61,16 @@ define Package/libootocc/description
 	$(call Package/ootoc/description)
 endef
 
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/lib $(1)/usr/include $(1)/usr/share
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/* $(1)/usr/lib
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include
+	$(CP) $(PKG_INSTALL_DIR)/usr/share/* $(1)/usr/share
+endef
+
 define Package/ootoc/install
 	$(INSTALL_DIR) $(1)/usr/bin
-	$(INSTALL_BIN) $(PKG_BUILD_DIR)/src/ootocCLI $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ootocCLI $(1)/usr/bin/
 endef
 
 $(eval $(call BuildPackage,ootoc))
