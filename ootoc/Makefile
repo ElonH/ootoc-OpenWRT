@@ -40,25 +40,12 @@ define Package/ootoc
 	CATEGORY:=Base system
 	URL:=https://github.com/msgpack/ootoc
 	TITLE:=opkg over tar over curl
-	DEPENDS:=+libootoc
-	MENU:=1
-endef
-
-define Package/libootoc
-	URL:=https://github.com/msgpack/ootoc
-	TITLE:=opkg over tar over curl
 	DEPENDS:=+libcurl +libyaml-cpp +libtar
-	SECTION:=lib
-	CATEGORY:=Libraries
-	VARIANT:=lib
+	MENU:=1
 endef
 
 define Package/ootoc/description
 	opkg over tar over curl
-endef
-
-define Package/libootocc/description
-	$(call Package/ootoc/description)
 endef
 
 define Build/InstallDev
@@ -76,4 +63,3 @@ define Package/ootoc/install
 endef
 
 $(eval $(call BuildPackage,ootoc))
-$(eval $(call BuildPackage,libootoc))
