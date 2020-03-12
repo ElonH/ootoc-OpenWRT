@@ -43,6 +43,13 @@ init_conf() {
 
 	# create log path
 	[ -d "${LOG%/*}" ] || mkdir -p "${LOG%/*}" 2>/dev/null
+
+	# disable signature
+	[ -e /etc/opkg.conf ] || {
+		_err "not exist file: /etc/opkg.conf"
+		return 1
+	}
+	sed -i "s/^[ ]*option check_signature/# option check_signaturesign/" /etc/opkg.conf
 	return 0
 }
 
