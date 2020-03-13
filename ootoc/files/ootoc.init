@@ -71,6 +71,8 @@ start_service() {
 		_info "Instance 'ootoc' disabled."
 		return 1
 	}
+	_info "Instance 'ootoc' enabled."
+	_info "$PROG subscription --addr \"$ADDR\" --port \"$PORT\" -i \"$AUX\" > \"/etc/opkg/distfeeds.conf\""
 
 	$PROG subscription --addr "$ADDR" --port "$PORT" -i "$AUX" > "/etc/opkg/distfeeds.conf"
 
