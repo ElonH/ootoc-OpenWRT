@@ -30,14 +30,12 @@ PKG_INSTALL:=1
 PKG_USE_MIPS16:=0
 PKG_BUILD_PARALLEL:=1
 
-CMAKE_INSTALL:=1
-
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
 
 CMAKE_OPTIONS+= -DSPDLOG_BUILD_EXAMPLE:BOOL=OFF \
 	-DSPDLOG_BUILD_TESTS:BOOL=OFF -DSPDLOG_BUILD_SHARED:BOOL=ON \
-	-DSPDLOG_FMT_EXTERNAL:BOOL=ON
+	-DSPDLOG_FMT_EXTERNAL:BOOL=ON -DSPDLOG_FMT_EXTERNAL_HO:BOOL=OFF
 
 define Package/spdlog
 	SECTION:=lib
@@ -50,6 +48,13 @@ endef
 
 define Package/spdlog/description
 	Very fast, header-only/compiled, C++ logging library.
+endef
+
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(PKG_INSTALL_DIR)/usr/include/spdlog/fmt/bundled
+	$(CP) $(PKG_BUILD_DIR)/include/spdlog/fmt/bundled $(PKG_INSTALL_DIR)/usr/include/spdlog/fmt
+	$(Build/InstallDev/cmake)
 endef
 
 define Package/spdlog/install
